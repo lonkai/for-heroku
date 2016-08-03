@@ -1,3 +1,7 @@
+.thlink {
+    cursor: pointer;
+}
+
 .th1 {
     background-color: #e8e8e8;
     text-shadow: 1px 0 #fff;

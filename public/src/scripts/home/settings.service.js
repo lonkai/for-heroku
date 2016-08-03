@@ -28,6 +28,7 @@
                     }
 
                 },
+                size: 'sm',
                 backdrop: 'static'
             });
 

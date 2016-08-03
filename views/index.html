@@ -33,7 +33,8 @@
                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    Hi Guest! Check my application. You can leave feedback by creating an issue. Don't forget to save it.
+                    Hi Guest! Check my application. You can leave feedback by creating an issue. Don't forget to save
+                    it.
                     Also you can rate my Issue Tracker using the help tab.
                 </div>
                 <h1 class="page-header">AngularJS Issue Tracker</h1>
@@ -43,22 +44,64 @@
                     <table class="table table-hover table-condensed table-bordered">
                         <thead>
                         <tr class="bg-warning">
-                            <th class="table-first-col col-lg-1 col-md-1 col-sm-1 col-xs-1">ID</th>
-                            <th class="col-lg-1 col-md-1 hidden-sm hidden-xs">STATUS</th>
-                            <th class="col-lg-7 col-md-7 col-sm-3 col-xs-3">ISSUE</th>
-                            <th class="col-lg-1 col-md-1 hidden-sm hidden-xs">PRIORITY</th>
-                            <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">LAST UPDATED</th>
-                            <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">ASSIGNED TO</th>
+                            <th class="table-first-col col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center thlink"
+                                ng-click="iss_ctrl.sortType = 'id'; iss_ctrl.sortReverse = !iss_ctrl.sortReverse">
+                                ID
+                                <span ng-show="iss_ctrl.sortType == 'id' && !iss_ctrl.sortReverse"
+                                      class="glyphicon glyphicon-sort-by-order"></span>
+                                <span ng-show="iss_ctrl.sortType == 'id' && iss_ctrl.sortReverse"
+                                      class="glyphicon glyphicon-sort-by-order-alt"></span>
+                            </th>
+                            <th class="col-lg-1 col-md-1 hidden-sm hidden-xs text-center thlink"
+                                ng-click="iss_ctrl.sortType = 'status.name'; iss_ctrl.sortReverse = !iss_ctrl.sortReverse">
+                                STATUS
+                                <span ng-show="iss_ctrl.sortType == 'status.name' && !iss_ctrl.sortReverse"
+                                      class="glyphicon glyphicon-sort-by-alphabet"></span>
+                                <span ng-show="iss_ctrl.sortType == 'status.name' && iss_ctrl.sortReverse"
+                                      class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                            </th>
+                            <th class="col-lg-7 col-md-7 col-sm-3 col-xs-3 text-center thlink"
+                                   ng-click="iss_ctrl.sortType = 'summary'; iss_ctrl.sortReverse = !iss_ctrl.sortReverse">
+                                    ISSUE
+                                    <span ng-show="iss_ctrl.sortType == 'summary' && !iss_ctrl.sortReverse"
+                                          class="glyphicon glyphicon-sort-by-alphabet"></span>
+                                    <span ng-show="iss_ctrl.sortType == 'summary' && iss_ctrl.sortReverse"
+                                          class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                            </th>
+                            <th class="col-lg-1 col-md-1 hidden-sm hidden-xs text-center thlink"
+                                   ng-click="iss_ctrl.sortType = 'priority.name'; iss_ctrl.sortReverse = !iss_ctrl.sortReverse">
+                                    PRIORITY
+                                    <span ng-show="iss_ctrl.sortType == 'priority.name' && !iss_ctrl.sortReverse"
+                                          class="glyphicon glyphicon-sort-by-alphabet"></span>
+                                    <span ng-show="iss_ctrl.sortType == 'priority.name' && iss_ctrl.sortReverse"
+                                          class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                            </th>
+                            <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center thlink"
+                                   ng-click="iss_ctrl.sortType = 'lastupdated'; iss_ctrl.sortReverse = !iss_ctrl.sortReverse">
+                                    LAST UPDATED
+                                    <span ng-show="iss_ctrl.sortType == 'lastupdated' && !iss_ctrl.sortReverse"
+                                          class="glyphicon glyphicon-sort-by-order"></span>
+                                    <span ng-show="iss_ctrl.sortType == 'lastupdated' && iss_ctrl.sortReverse"
+                                          class="glyphicon glyphicon-sort-by-order-alt"></span>
+                            </th>
+                            <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center thlink"
+                                   ng-click="iss_ctrl.sortType = 'assignedto'; iss_ctrl.sortReverse = !iss_ctrl.sortReverse">
+                                    ASSIGNED TO
+                                    <span ng-show="iss_ctrl.sortType == 'assignedto' && !iss_ctrl.sortReverse"
+                                          class="glyphicon glyphicon-sort-by-alphabet"></span>
+                                    <span ng-show="iss_ctrl.sortType == 'assignedto' && iss_ctrl.sortReverse"
+                                          class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr class="{{iss_ctrl.setClass(issue.status)}}"
-                            ng-repeat="issue in iss_ctrl.issueList | filter: iss_ctrl.searchQuery">
+                            ng-repeat="issue in iss_ctrl.issueList | orderBy: iss_ctrl.sortType:iss_ctrl.sortReverse | filter: iss_ctrl.searchQuery ">
                             <td class="text-center table-first-col col-lg-1 col-md-1 col-sm-1 col-xs-1">{{issue.id}}
                                 <div class="btn-group dropup" uib-dropdown>
                                     <button type="button" class="btn btn-default btn-xs pull-right
                                 " uib-dropdown-toggle>
-                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 
                                     </button>
                                     <ul class="dropdown-menu" uib-dropdown-menu role="menu"
@@ -72,16 +115,20 @@
                                     </ul>
                                 </div>
                             </td>
+
                             <td class="col-lg-1 col-md-1 hidden-sm hidden-xs">
-                                <select class="form-control input-sm span" ng-model="iss_ctrl.initIssue[$index].status" ng-change="iss_ctrl.dialog(iss_ctrl.initIssue[$index].status, $index)"
-                                        ng-options="status.name for status in iss_ctrl.stasuses track by status.id">
+                                <select class="form-control input-sm span"
+                                        ng-model="issue.status"
+                                        ng-change="iss_ctrl.dialog(issue.status, $index)"
+                                        ng-options="status.name for status in iss_ctrl.stasuses track by status.name">
                                 </select>
                             </td>
                             <td class="col-lg-7 col-md-7 col-sm-7 col-xs-7">{{issue.summary}}
                                 <br>
                                 <button type="button" ng-click="iscollapsed = !iscollapsed" class="bg-{{iss_ctrl.setClass(issue.status)}} btn btn-sm
                                 dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span>
+                                    <span ng-show="iscollapsed" class="glyphicon glyphicon-triangle-bottom"></span>
+                                    <span ng-show="!iscollapsed" class="glyphicon glyphicon-triangle-top"></span>
                                 </button>
                                 <div uib-collapse="!iscollapsed">
                                     <hr>
@@ -101,20 +148,22 @@
                                         </div>
                                         <button ng-hide="issue.status.id==3" type="button"
                                                 class="btn btn-danger btn-xs pull-right"
-                                                ng-click="iss_ctrl.deleteComment(comment.id)">delete
+                                                ng-click="iss_ctrl.deleteComment(comment.id)">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                         </button>
                                     </div>
                                     <button ng-hide="issue.status.id==3" type="button"
                                             class="btn btn-default btn-sm"
                                             ng-click="iss_ctrl.addComment(issue.id)">add new
                                     </button>
+                                    <span ng-show="issue.status.id==3" class="glyphicon glyphicon-lock"></span>
                                 </div>
                             </td>
                             <td class="col-lg-1 col-md-1 hidden-sm hidden-xs">
                                 <select class="form-control input-sm"
-                                        ng-options="priority.name for priority in iss_ctrl.priorities track by priority.id"
-                                        ng-model="iss_ctrl.initIssue[$index].priority"
-                                        ng-change="iss_ctrl.dialog(iss_ctrl.initIssue[$index].priority, $index)">
+                                        ng-model="issue.priority"
+                                        ng-change="iss_ctrl.dialog(issue.priority, $index)"
+                                        ng-options="priority.name for priority in iss_ctrl.priorities track by priority.name">
                                 </select>
                             </td>
                             <td class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1">{{issue.lastupdated}}</td>

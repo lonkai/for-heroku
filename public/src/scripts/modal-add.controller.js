@@ -13,7 +13,7 @@
 
         vm.issueList = {
             id: '', status: {id: 1, name: 'new'}, summary: '', priority: {id: 1},
-            lastupdated: today.getDate() + '.' + month + '.' + today.getFullYear(), assignedto: '', opened: true
+            lastupdated: today.getFullYear() + '/' + ("0" + (month)).slice(-2) + '/' + ("0" + (today.getDate())).slice(-2), assignedto: '', opened: true
         };
 
         vm.priorities = priorities;

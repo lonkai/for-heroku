@@ -10,8 +10,11 @@
     function IssueTrackerCtrl($scope, $window, $rootScope, $uibModal, $log, $http, $q, issuesService, issueEditService, issueAddService, commentAddService, helpService, settingsService, dialogService) {
         var vm = this;
 
+        vm.sortType     = 'id';
+        vm.sortReverse  = false;
         vm.searchQuery = '';
         vm.log = true;
+        vm.updIssueList = {};
 
         $http.get("./src/json/issues.json")
             .then(function (response) {
@@ -251,18 +254,21 @@
 
         vm.dialog = function (issue, index) {
 
+            vm.updIssueList[index] = vm.issueList[index];
+            vm.issueList[index] = vm.initIssue[index];
+
+            $log.info(vm.issueList[index]);
+
             var modalInstance = dialogService.create('c');
 
             modalInstance.result.then(function (result) {
 
                 if (result !== null) {
-                    vm.issueList[index] = vm.initIssue[index];
+                    vm.issueList[index] = vm.updIssueList[index];
                     vm.sendIssueData();
                 }
                 else if (result == null) {
-                    vm.initIssue = vm.copyIssue();
                 }
-
             });
         };
 
