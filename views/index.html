@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="issueTrackerApp">>
+<html lang="en" ng-app="issueTrackerApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,15 +21,13 @@
 
 <article></article>
 <section></section>
-
-<div></div>
-
 <div ng-controller="IssueTrackerCtrl as iss_ctrl" id="wrapper" ng-cloak>
 
     <div class="container-fluid">
         <nav-menu></nav-menu>
         <div id="content" class="row">
             <div class="col-sm-12 col-md-12 col-xs-12 main-content">
+                <br>
                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
@@ -37,8 +35,8 @@
                     it.
                     Also you can rate my Issue Tracker using the help tab.
                 </div>
-                <h1 class="page-header">AngularJS Issue Tracker</h1>
-                <h4 class="page-header" ng-if="iss_ctrl.remain()">Remaining: {{iss_ctrl.remain()}} opened issues from
+                <h1 class="title">AngularJS Issue Tracker</h1>
+                <h4 ng-if="iss_ctrl.remain()">Remaining: {{iss_ctrl.remain()}} opened issues from
                     {{iss_ctrl.issueList.length}}</h4>
                 <div class="table">
                     <table class="table table-hover table-condensed table-bordered">
@@ -102,7 +100,6 @@
                                     <button type="button" class="btn btn-default btn-xs pull-right
                                 " uib-dropdown-toggle>
                                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-
                                     </button>
                                     <ul class="dropdown-menu" uib-dropdown-menu role="menu"
                                         aria-labelledby="btn-append-to-single-button">
@@ -115,7 +112,6 @@
                                     </ul>
                                 </div>
                             </td>
-
                             <td class="col-lg-1 col-md-1 hidden-sm hidden-xs">
                                 <select class="form-control input-sm span"
                                         ng-model="issue.status"
@@ -174,15 +170,15 @@
                 </div>
             </div>
         </div>
-        <div id="push"></div>
     </div>
 </div>
-
-<footer class="navbar navbar-fixed-bottom navbar-inverse">
+<footer class="navbar navbar-fixed-bottom navbar-my">
     <div class="foot">
-        <h4>ISSUE TRACKER</h4>
+        <h5>&copy; Lonkai 2016. All Rights Reserved.</h5>
     </div>
 </footer>
+
+<script src="./lib/index.js"></script>
 
 <script src="./lib/jquery.js"></script>
 <script src="./lib/bootstrap.js"></script>
@@ -213,6 +209,7 @@
 <script src="./src/scripts/modal-add.controller.js"></script>
 <script src="./src/scripts/modal-edit.controller.js"></script>
 <script src="./src/scripts/modal-comment-add.controller.js"></script>
+
 
 </body>
 </html>

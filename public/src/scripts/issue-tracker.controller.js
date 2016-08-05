@@ -5,9 +5,9 @@
         .module('issueTrackerApp')
         .controller('IssueTrackerCtrl', IssueTrackerCtrl);
 
-    IssueTrackerCtrl.$inject = ['$scope', '$window', '$rootScope', '$uibModal', '$log', '$http', '$q', 'issuesService', 'issueEditService', 'issueAddService', 'commentAddService', 'helpService', 'settingsService', 'dialogService'];
+    IssueTrackerCtrl.$inject = ['$scope', '$uibModal', '$log', '$http', '$q', 'issuesService', 'issueEditService', 'issueAddService', 'commentAddService', 'helpService', 'settingsService', 'dialogService'];
 
-    function IssueTrackerCtrl($scope, $window, $rootScope, $uibModal, $log, $http, $q, issuesService, issueEditService, issueAddService, commentAddService, helpService, settingsService, dialogService) {
+    function IssueTrackerCtrl($scope, $uibModal, $log, $http, $q, issuesService, issueEditService, issueAddService, commentAddService, helpService, settingsService, dialogService) {
         var vm = this;
 
         vm.sortType     = 'id';
@@ -19,6 +19,7 @@
         $http.get("./src/json/issues.json")
             .then(function (response) {
                 vm.issueList = response.data;
+                $log.info(response.data);
                 vm.initIssue = vm.copyIssue();
             });
 
@@ -253,11 +254,10 @@
         };
 
         vm.dialog = function (issue, index) {
+            $log.info(vm.initIssue[index]);
 
             vm.updIssueList[index] = vm.issueList[index];
             vm.issueList[index] = vm.initIssue[index];
-
-            $log.info(vm.issueList[index]);
 
             var modalInstance = dialogService.create('c');
 
@@ -268,7 +268,9 @@
                     vm.sendIssueData();
                 }
                 else if (result == null) {
+                    vm.issueList = vm.copyIssue()
                 }
+
             });
         };
 
