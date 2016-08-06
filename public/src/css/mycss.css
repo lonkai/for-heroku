@@ -9,13 +9,16 @@
 
 .mytable {
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
 }
 
-hr {
- border-top: 1px solid #a5a3a3;
+.mywrapper {
+    margin-bottom: 2%;
 }
 
+.text {
+    color: #ccbdbd;
+}
 .foot {
     color: rgb(157, 157, 157);
     text-align: center;
@@ -23,22 +26,19 @@ hr {
 
 .navbar-my {
     position: relative;
-    top: 30px;
     border-radius: 5px;
-    background-color: rgb(34, 34, 34);
+    background-color: rgb(12, 12, 12);
     min-height: 0px;
 }
 
 .title {
+    color: #caa0a0;
     padding: 30px;
 }
 
-tbody {
-    background-color: #dbf4da;  
-}
-
 body{
-    background-color: rgba(213, 216, 215, 0.76);
+    background-image: url(http://cloudberrystudio.ru/ff/1/tekstury_fon_kreativ_raznye_cveta_1920x1200.jpg);
+    background-size: cover;
 }
 
 @media (max-width: 768px) {

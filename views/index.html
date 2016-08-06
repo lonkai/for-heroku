@@ -21,7 +21,7 @@
 
 <article></article>
 <section></section>
-<div ng-controller="IssueTrackerCtrl as iss_ctrl" id="wrapper" ng-cloak>
+<div class="mywrapper" ng-controller="IssueTrackerCtrl as iss_ctrl" ng-cloak>
 
     <div class="container-fluid">
         <nav-menu></nav-menu>
@@ -36,7 +36,7 @@
                     Also you can rate my Issue Tracker using the help tab.
                 </div>
                 <h1 class="title">AngularJS Issue Tracker</h1>
-                <h4 ng-if="iss_ctrl.remain()">Remaining: {{iss_ctrl.remain()}} opened issues from
+                <h4 class="text" ng-if="iss_ctrl.remain()">Remaining: {{iss_ctrl.remain()}} opened issues from
                     {{iss_ctrl.issueList.length}}</h4>
                 <div class="table">
                     <table class="table table-hover table-condensed table-bordered">
@@ -172,7 +172,7 @@
         </div>
     </div>
 </div>
-<footer class="navbar navbar-fixed-bottom navbar-my">
+<footer class="navbar navbar-inverse navbar-fixed-bottom navbar-my">
     <div class="foot">
         <h5>&copy; Lonkai 2016. All Rights Reserved.</h5>
     </div>
