@@ -90,3 +90,7 @@ body{
     width: 100%;
     text-align: center;
 }
+
+.bg-blue {
+    background-color: #052a4a;
+}
