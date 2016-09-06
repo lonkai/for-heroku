@@ -31,7 +31,6 @@ app.get('/', function (req, res) {
 });
 
 app.get('./public/src/json/issues.json', function (req, res) {
-  console.log('ddfsdfsdfdsfdsfds');
 
   var fs = require('fs');
   //fs.appendFile("./public/src/json/issues-new.json", JSON.stringify(data), function(err) {
@@ -41,9 +40,6 @@ app.get('./public/src/json/issues.json', function (req, res) {
   });
 
 });
-
-var phases = require('./public/src/json/poll');
-console.log(phases);
 
 app.post('/issues', function (req, res) {
   var data = req.body;
@@ -90,6 +86,22 @@ app.post('/poll', function (req, res) {
   });
 
   res.send('nice3');
+
+});
+
+app.post('/snake', function (req, res) {
+  var data = req.body;
+  var fs = require('fs');
+  //fs.appendFile("./public/src/json/issues-new.json", JSON.stringify(data), function(err) {
+  fs.writeFile("./public/src/json/snake.json", JSON.stringify(data), function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Файл4 Збережено!");
+    }
+  });
+
+  res.send('nice4');
 
 });
 

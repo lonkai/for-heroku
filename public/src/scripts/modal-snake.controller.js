@@ -4,10 +4,18 @@
         .module('issueTrackerApp')
         .controller('SnakeCtrl', SnakeCtrl);
 
-    SnakeCtrl.$inject = ['$scope', '$uibModalInstance', '$window', '$timeout'];
+    SnakeCtrl.$inject = ['$scope', '$http', '$uibModalInstance', '$window', '$timeout', 'snake'];
 
-    function SnakeCtrl($scope, $uibModalInstance, $window, $timeout) {
+    function SnakeCtrl($scope, $http, $uibModalInstance, $window, $timeout, snake) {
         var vm = this;
+
+        vm.snakeRes = snake;
+        vm.name = '';
+
+        vm.snakeRes.sort(function (obj1, obj2) {
+            // Сортировка по убыванию
+            return obj2.scores - obj1.scores;
+        });
 
         vm.BOARD_SIZE = 20;
 
@@ -54,7 +62,7 @@
             return vm.COLORS.BOARD;
         };
 
-        vm.update = function() {
+        vm.update = function () {
             var newHead = vm.getNewHead();
 
             if (vm.boardCollision(newHead) || vm.selfCollision(newHead)) {
@@ -76,7 +84,7 @@
             $timeout(vm.update, vm.interval);
         }
 
-        vm.getNewHead = function() {
+        vm.getNewHead = function () {
             var newHead = angular.copy(vm.snake.parts[0]);
 
             // Update Location
@@ -92,19 +100,19 @@
             return newHead;
         }
 
-        vm.boardCollision = function(part) {
+        vm.boardCollision = function (part) {
             return part.x === vm.BOARD_SIZE || part.x === -1 || part.y === vm.BOARD_SIZE || part.y === -1;
         }
 
-        vm.selfCollision = function(part) {
+        vm.selfCollision = function (part) {
             return vm.board[part.y][part.x] === true;
         }
 
-        vm.fruitCollision = function(part) {
+        vm.fruitCollision = function (part) {
             return part.x === vm.fruit.x && part.y === vm.fruit.y;
         }
 
-        vm.resetFruit = function() {
+        vm.resetFruit = function () {
             var x = Math.floor(Math.random() * vm.BOARD_SIZE);
             var y = Math.floor(Math.random() * vm.BOARD_SIZE);
 
@@ -112,9 +120,9 @@
                 return vm.resetFruit();
             }
             vm.fruit = {x: x, y: y};
-        }
+        };
 
-        vm.eatFruit = function() {
+        vm.eatFruit = function () {
             vm.score++;
 
             // Grow by 1
@@ -125,9 +133,9 @@
             if (vm.score % 5 === 0) {
                 vm.interval -= 15;
             }
-        }
+        };
 
-        vm.gameOver = function() {
+        vm.gameOver = function () {
             vm.isGameOver = true;
 
             $timeout(function () {
@@ -135,9 +143,27 @@
             }, 500);
 
             vm.setupBoard();
+
+            vm.newScore = {
+                name: vm.name,
+                scores: vm.score
+            }
+
+            console.log(vm.newScore);
+
+            if (vm.newScore.scores >= vm.snakeRes[vm.snakeRes.length - 1].scores) {
+                Object.assign(vm.snakeRes[vm.snakeRes.length - 1], vm.newScore);
+            }
+
+            vm.snakeRes.sort(function (obj1, obj2) {
+                // Сортировка по убыванию
+                return obj2.scores - obj1.scores;
+            });
+            
+            $http.post("./snake", vm.snakeRes)
         };
 
-        vm.setupBoard = function() {
+        vm.setupBoard = function () {
             vm.board = [];
             for (var i = 0; i < vm.BOARD_SIZE; i++) {
                 vm.board[i] = [];
@@ -145,7 +171,7 @@
                     vm.board[i][j] = false;
                 }
             }
-        }
+        };
 
         vm.setupBoard();
 

@@ -1,12 +1,39 @@
 <h1 class="foot">ZMEIKA</h1>
-<h3>Score: {{snake.score}}</h3>
+<div class="container-fluid">
+    <form>
+        <div class="form-group">
+            <label for="inputName">Enter your nickname:</label>
+            <input type="text" class="form-control" name="inputName" cols="10" rows="1" ng-model="Snake.name"
+                   style="width: auto">
+        </div>
+    </form>
+</div>
+<table class="table table-hover table-condensed table-bordered">
+    <thead>
+    <tr class="bg-warning">
+        <th class="col-xs-1 text-center">
+            Nickname
+        </th>
+        <th class="col-xs-1 text-center">
+            Score
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="result in Snake.snakeRes">
+        <td>{{result.name}}</td>
+        <td>{{result.scores}}</td>
+    </tr>
+    </tbody>
+</table>
+<h3>Score: {{Snake.score}}</h3>
 <div>
-    <div class="row1" ng-repeat="column in snake.board">
+    <div class="row1" ng-repeat="column in Snake.board">
         <div class="column"
-             ng-style="{'background-color': snake.setStyling($parent.$index, $index)}"
-             ng-repeat="row in column track by $index"
-        ></div>
+             ng-style="{'background-color': Snake.setStyling($parent.$index, $index)}"
+             ng-repeat="row in column track by $index">
+        </div>
     </div>
 </div>
 <hr>
-<button class="btn btn-info centerbtn" ng-click="snake.startGame()">Start Game</button>
+<button class="btn btn-info centerbtn" ng-click="Snake.startGame()" ng-disabled="Snake.name === ''">Start Game</button>

@@ -33,6 +33,11 @@
                 vm.poll = response.data;
             });
 
+        $http.get("./src/json/snake.json")
+            .then(function (response) {
+                vm.snake = response.data;
+            });
+
         vm.copyIssue = function () {
             return angular.copy(vm.issueList)
         };
@@ -235,12 +240,11 @@
             });
         };
 
-        vm.snake = function () {
-            var modalInstance = snakeService.create();
+        vm.getSnakeModal = function () {
+            var modalInstance = snakeService.create(vm.snake);
 
             modalInstance.result.then(function (count) {
                 if (count !== null) {
-consolo.log('sds');
                 }
             });
         };
