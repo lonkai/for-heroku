@@ -6,12 +6,13 @@
             <label for="inputName">Enter your nickname:</label>
             <input type="text" class="form-control" name="inputName" cols="10" rows="1" ng-model="Snake.name"
                    style="width: auto">
+            <span style="color: red" ng-show="Snake.name === ''">invalid(ти або твій нік)</span>
         </div>
     </form>
 </div>
 <table class="table table-hover table-condensed table-bordered">
     <thead>
-    <tr class="bg-warning">
+    <tr class="bg-primary">
         <th class="col-xs-1 text-center">
             Nickname
         </th>
@@ -21,7 +22,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="result in Snake.snakeRes">
+    <tr class="bg-warning" ng-repeat="result in Snake.snakeRes">
         <td>{{result.name}}</td>
         <td>{{result.scores}}</td>
     </tr>
@@ -36,6 +37,5 @@
         </div>
     </div>
 </div>
-<hr>
 <button class="btn btn-primary centerbtn" ng-click="Snake.startGame()" ng-disabled="Snake.name === ''">Start Game</button>
 </div>
