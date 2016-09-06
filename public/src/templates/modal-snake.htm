@@ -1,0 +1,12 @@
+<h1 class="foot">ZMEIKA</h1>
+<h3>Score: {{snake.score}}</h3>
+<div>
+    <div class="row1" ng-repeat="column in snake.board">
+        <div class="column"
+             ng-style="{'background-color': snake.setStyling($parent.$index, $index)}"
+             ng-repeat="row in column track by $index"
+        ></div>
+    </div>
+</div>
+<hr>
+<button class="btn btn-info centerbtn" ng-click="snake.startGame()">Start Game</button>

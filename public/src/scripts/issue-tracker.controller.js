@@ -5,9 +5,9 @@
         .module('issueTrackerApp')
         .controller('IssueTrackerCtrl', IssueTrackerCtrl);
 
-    IssueTrackerCtrl.$inject = ['$scope', '$uibModal', '$log', '$http', '$q', 'issuesService', 'issueEditService', 'issueAddService', 'commentAddService', 'helpService', 'settingsService', 'dialogService'];
+    IssueTrackerCtrl.$inject = ['$scope', '$uibModal', '$log', '$http', '$q', 'snakeService', 'issuesService', 'issueEditService', 'issueAddService', 'commentAddService', 'helpService', 'settingsService', 'dialogService'];
 
-    function IssueTrackerCtrl($scope, $uibModal, $log, $http, $q, issuesService, issueEditService, issueAddService, commentAddService, helpService, settingsService, dialogService) {
+    function IssueTrackerCtrl($scope, $uibModal, $log, $http, $q, snakeService, issuesService, issueEditService, issueAddService, commentAddService, helpService, settingsService, dialogService) {
         var vm = this;
 
         vm.sortType     = 'id';
@@ -231,6 +231,16 @@
                 if (count !== null) {
                     vm.count = count;
                     vm.sendPoll();
+                }
+            });
+        };
+
+        vm.snake = function () {
+            var modalInstance = snakeService.create();
+
+            modalInstance.result.then(function (count) {
+                if (count !== null) {
+consolo.log('sds');
                 }
             });
         };

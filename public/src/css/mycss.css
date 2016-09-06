@@ -49,3 +49,44 @@ body{
         border-radius: 0px;
     }
 }
+
+<!-- snake -->
+* {
+    font-family: "Lucida Grande";
+}
+
+#gameContainer, #pastScores {
+    width: 600px;
+    background-color: white;
+}
+
+.row1 {
+    height: 26px;
+    text-align: center;
+}
+
+.column {
+    border: 1px solid white;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+}
+
+#startGame {
+    width: 120px;
+    padding: 10px;
+    margin-top: 5px;
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
+#startGame:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.centerbtn {
+    width: 100%;
+    text-align: center;
+}
