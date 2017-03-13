@@ -20,10 +20,7 @@
 
 <body>
     <div ng-controller="IssueTrackerCtrl as iss_ctrl" ng-cloak>
-        <div class="first" ng-if="!iss_ctrl.isAutorized">
-            <sign-in></sign-in>
-        </div>
-        <div ng-if="iss_ctrl.isAutorized">
+        <div>
             <header></header>
             <article></article>
             <section></section>
